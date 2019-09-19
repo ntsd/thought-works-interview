@@ -1,6 +1,6 @@
 ### Trains Problem
 
-I have solve this problem by these algorithms with graph structure.
+I had solved this problem with these algorithms with graph structure.
 
 ##### 1. Depth-first Search (DFS)
    
