@@ -185,22 +185,3 @@ glob prok Gold is 57800 Credits
 glob prok Iron is 782 Credits
 I have no idea what you are talking about
 Copyright 2012 ThoughtWorks, Inc
-
-
-class Node:
-
-    def __init__(self, name):
-        self.name = name
-        self.childs = {}
-
-    def add_child(self, child, distance):
-        self.childs[child] = distance
-
-    def get_childs(self):
-        return *self.childs
-
-    def get_distance(self, node):
-        try:
-            return self.childs[node]
-        except KeyError:
-            raise NoSuchRouteException("NO SUCH ROUTE")

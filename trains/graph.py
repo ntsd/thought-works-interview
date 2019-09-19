@@ -68,7 +68,7 @@ class Graph:
 
             for next_node in destinations:
                 weight = weight_to_current_node + self.get_distance(current_node, next_node)
-                if next_node not in shortest_paths or next_node == start: # next_node == start for start and end is the same node
+                if next_node not in shortest_paths or next_node == start:
                     shortest_paths[next_node] = (current_node, weight)
                 else:
                     current_shortest_weight = shortest_paths[next_node][1]
