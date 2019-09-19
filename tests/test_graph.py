@@ -30,15 +30,19 @@ class TestGraph(unittest.TestCase):
         self.assertRaises(NoSuchRouteException, self.graph.get_distance, 'F', 'A')
         self.assertRaises(NoSuchRouteException, self.graph.get_distance, 'A', 'F')
 
-    def test_get_all_routes_in_depth(self):
+    def test_get_neighbors(self):
+        self.assertEqual(list(self.graph.get_neighbors('A')), ['B', 'D', 'E'])
+        self.assertEqual(list(self.graph.get_neighbors('C')), ['D', 'E'])
+
+    def test_get_all_routes_by_depth(self):
         self.assertEqual(
-            list(self.graph.get_all_routes_in_depth('C', 'C', max_depth=3)),
+            list(self.graph.get_all_routes_by_depth('C', 'C', max_depth=3)),
             [['C', 'E', 'B', 'C'], ['C', 'D', 'C']]
         )
 
-    def test_get_all_routes_in_distance(self):
+    def test_get_all_routes_by_distance(self):
         self.assertEqual(
-            list(self.graph.get_all_routes_in_distance('C', 'C', max_distance=30)),
+            list(self.graph.get_all_routes_by_distance('C', 'C', max_distance=30)),
             [['C', 'E', 'B', 'C'],
             ['C', 'E', 'B', 'C', 'E', 'B', 'C'],
             ['C', 'E', 'B', 'C', 'E', 'B', 'C', 'E', 'B', 'C'],
