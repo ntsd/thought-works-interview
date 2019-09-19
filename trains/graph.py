@@ -1,7 +1,5 @@
 from trains.exceptions import NoSuchRouteException, RouteNotPossibleException
 
-import bisect
-import heapq
 from collections import defaultdict
 
 
@@ -32,7 +30,7 @@ class Graph:
         """Return neighbors of the node."""
         return self.routes[node].keys()
 
-    def get_all_routes_by_depth(self, start, end, max_depth):
+    def get_all_routes_by_max_depth(self, start, end, max_depth):
         """Return all routes by Depth First Search stop when its depth is more than max depth."""
         stack = [(start, [start], 1)]
         while stack:
@@ -43,7 +41,7 @@ class Graph:
                 if depth < max_depth:
                     stack.append((neighbour, path + [neighbour], depth + 1))
     
-    def get_all_routes_by_distance(self, start, end, max_distance):
+    def get_all_routes_by_max_distance(self, start, end, max_distance):
         """Return all routes by Depth First Search stop when its distance is more than max distance."""
         stack = [(start, [start], 0)]
         while stack:

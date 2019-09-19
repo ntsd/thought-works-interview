@@ -1,12 +1,12 @@
 ### Trains Problem
 
-algorithms that are used to solve this problem with graph structure.
+I have solve this problem by these algorithms with graph structure.
 
 ##### 1. Depth-first Search (DFS)
    
    DFS to get all paths by depth or distance because DFS use lower memory than Breadth-first search (BFS) and it just gets all paths until the depth is more than maximum depth or distance is more than maximum distance so BFS is unnecessary for this problem.
 
-   I created get_all_routes_in_depth and get_all_routes_in_distance because of this problem not require to store both distance and depth for it so I separate it for saving resource.
+   I created get_all_routes_by_max_depth and get_all_routes_by_max_distance because of this problem not require to store both distance and depth for it so I separate it for saving resource.
 
 ##### 2. Dijkstra's
     

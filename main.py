@@ -13,4 +13,4 @@ if __name__ == "__main__":
         print(trains.count_paths_with_exact_routes('A', 'C', 4))
         print(trains.shortest_route_distance('A', 'C'))
         print(trains.shortest_route_distance('B', 'B'))
-        print(trains.difference_route_by_distance('C', 'C', 30))
+        print(trains.difference_route_by_max_distance('C', 'C', 30))

@@ -31,8 +31,8 @@ class TestTrains(unittest.TestCase):
     def test_shortest_route_distance_route_not_possible_exception(self):
         self.assertRaises(RouteNotPossibleException, self.trains.shortest_route_distance, 'B', 'F')
 
-    def test_difference_route_by_distance(self):
-        self.assertEqual(self.trains.difference_route_by_distance('C', 'C', 30), 7)
+    def test_difference_route_by_max_distance(self):
+        self.assertEqual(self.trains.difference_route_by_max_distance('C', 'C', 30), 7)
 
 
 if __name__ == "__main__":

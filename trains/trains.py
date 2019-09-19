@@ -31,12 +31,12 @@ class Trains:
 
     def count_paths_with_max_routes(self, start_node, end_node, max_routes):
         """Return number of all paths start with start_node and end with end_node with max_routes."""
-        return len(list(self.graph.get_all_routes_by_depth(start_node, end_node, max_routes)))
+        return len(list(self.graph.get_all_routes_by_max_depth(start_node, end_node, max_routes)))
 
     def count_paths_with_exact_routes(self, start_node, end_node, exact_routes):
         """Return number of all paths start with start_node and end with end_node with exact_routes."""
         count = 0
-        for route in self.graph.get_all_routes_by_depth(start_node, end_node, exact_routes):
+        for route in self.graph.get_all_routes_by_max_depth(start_node, end_node, exact_routes):
             if len(route) == exact_routes + 1:
                 count += 1
         return count
@@ -45,9 +45,9 @@ class Trains:
         """Return the shortest distance from start_node to end_node."""
         return self.graph.get_shortest_distance(start_node, end_node)
 
-    def difference_route_by_distance(self, start_node, end_node, distance):
-        """Return number of all paths start with start_node and end with end_node in distance"""
-        return len(list(self.graph.get_all_routes_by_distance(start_node, end_node, distance)))
+    def difference_route_by_max_distance(self, start_node, end_node, distance):
+        """Return number of all paths start with start_node and end with end_node in distance."""
+        return len(list(self.graph.get_all_routes_by_max_distance(start_node, end_node, distance)))
 
 
 if __name__ == "__main__":
