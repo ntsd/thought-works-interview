@@ -22,30 +22,31 @@ class Graph:
     def get_childs(self, node):
         return self.routes[node].keys()
 
-    def get_all_routes_in_depth(self, start, end=None, max_depth=0):
-        """DFS"""
+    def get_all_routes_in_depth(self, start, end, max_depth):
+        """Get all routes by Depth First Search stop when depth is more than max depth"""
         stack = [(start, [start], 1)]
         while stack:
             (current, path, depth) = stack.pop()
             for neighbour in self.get_childs(current):
-                if neighbour == end or depth >= max_depth:
+                if neighbour == end:
                     yield path + [neighbour]
-                else:
+                if depth < max_depth:
                     stack.append((neighbour, path + [neighbour], depth + 1))
     
-    def get_all_routes_in_distance(self, start, max_distance=0): # bug
-        """DFS"""
+    def get_all_routes_in_distance(self, start, end, max_distance):
+        """Get all routes by Depth First Search stop when distance is more than max distance"""
         stack = [(start, [start], 0)]
         while stack:
             (current, path, distance) = stack.pop()
             for neighbour in self.get_childs(current):
-                if distance >= max_distance:
-                    yield path + [neighbour]
-                else:
-                    stack.append((neighbour, path + [neighbour], distance + self.get_distance(current, neighbour)))
+                next_distance = distance + self.get_distance(current, neighbour)
+                if next_distance < max_distance:
+                    if neighbour == end:
+                        yield path + [neighbour]
+                    stack.append((neighbour, path + [neighbour], next_distance))
 
     def get_shortest_distance(self, start, end):
-        """Dijkstra algorithm"""
+        """Find shortest distance from start to end by Dijkstra Algorithm"""
         shortest_paths = {start: (None, 0)}
         visited = set()
         current_node = start
@@ -57,7 +58,7 @@ class Graph:
 
             for next_node in destinations:
                 weight = weight_to_current_node + self.get_distance(current_node, next_node)
-                if next_node not in shortest_paths or next_node == start: # check next_node == start for start and end is the same node
+                if next_node not in shortest_paths or next_node == start: # next_node == start for start and end is the same node
                     shortest_paths[next_node] = (current_node, weight)
                 else:
                     current_shortest_weight = shortest_paths[next_node][1]
@@ -69,7 +70,7 @@ class Graph:
                 if node not in visited:
                     next_destinations[node] = shortest_paths[node]
                 
-            if not next_destinations: # break when no route
+            if not next_destinations:
                 break
             
             current_node = min(next_destinations, key=lambda k: next_destinations[k][1])
@@ -77,7 +78,7 @@ class Graph:
         try:
             return shortest_paths[end][1]
         except KeyError:
-            raise RouteNotPossibleException("NO SUCH ROUTE")
+            raise RouteNotPossibleException()
 
 
 if __name__ == "__main__":
@@ -92,7 +93,7 @@ if __name__ == "__main__":
     graph.add_route('E', 'B', 3)
     graph.add_route('A', 'E', 7)
     print(list(graph.get_all_routes_in_depth('C', 'C', max_depth=3)))
-    print(list(graph.get_all_routes_in_depth('A', max_depth=4)))
+    print(list(graph.get_all_routes_in_depth('A', 'C', max_depth=4)))
     print(graph.get_shortest_distance('A', 'C'))
     print(graph.get_shortest_distance('B', 'B'))
-    print(list(graph.get_all_routes_in_distance('C', max_distance=30)))
+    print(list(graph.get_all_routes_in_distance('C', 'C', max_distance=30)))

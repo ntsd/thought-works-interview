@@ -1,6 +1,15 @@
 
+#### Run example
+
+run this command on `problem1-trains` directory
+
+```
+python3 main.py
+```
 
 #### Run test all
+
+run this command on `problem1-trains` directory
 
 ```
 python3 -m unittest discover
