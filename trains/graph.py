@@ -11,19 +11,22 @@ class Graph:
         self.routes = defaultdict(dict)
 
     def add_route(self, node_from, node_to, distance):
+        """Add route to graph"""
         self.routes[node_from][node_to] = distance
 
     def get_distance(self, node_from, node_to):
+        """Get distance of route"""
         try:
             return self.routes[node_from][node_to]
         except KeyError:
             raise NoSuchRouteException("NO SUCH ROUTE")
     
     def get_childs(self, node):
+        """Get childs of node"""
         return self.routes[node].keys()
 
     def get_all_routes_in_depth(self, start, end, max_depth):
-        """Get all routes by Depth First Search stop when depth is more than max depth"""
+        """Get all routes by Depth First Search stop when depth is more than max depth."""
         stack = [(start, [start], 1)]
         while stack:
             (current, path, depth) = stack.pop()
@@ -34,7 +37,7 @@ class Graph:
                     stack.append((neighbour, path + [neighbour], depth + 1))
     
     def get_all_routes_in_distance(self, start, end, max_distance):
-        """Get all routes by Depth First Search stop when distance is more than max distance"""
+        """Get all routes by Depth First Search stop when distance is more than max distance."""
         stack = [(start, [start], 0)]
         while stack:
             (current, path, distance) = stack.pop()
@@ -46,7 +49,7 @@ class Graph:
                     stack.append((neighbour, path + [neighbour], next_distance))
 
     def get_shortest_distance(self, start, end):
-        """Find shortest distance from start to end by Dijkstra Algorithm"""
+        """Find shortest distance from start to end by Dijkstra Algorithm."""
         shortest_paths = {start: (None, 0)}
         visited = set()
         current_node = start
