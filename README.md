@@ -8,7 +8,7 @@ I had solved this problem with these algorithms with graph structure.
 
    I created get_all_routes_by_max_depth and get_all_routes_by_max_distance because of this problem not require to store both distance and depth for it so I separate it for saving resource.
 
-##### 2. Dijkstra's
+##### 2. Dijkstra
     
     Dijkstra for shortest distance because Dijkstra will pick node from closest distance first difference to BFS or DFS that will pick node base on root or children nodes.
 
